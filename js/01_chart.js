@@ -1,4 +1,5 @@
 function drawChart(data) {
+  clearSelection();
   const svg = d3.select('#chart');
 
   const width = 600,
@@ -46,4 +47,7 @@ function drawChart(data) {
       .attr('id', d => d.name)
       .attr('d', d => line(d.ranks))
       .on('click', () => highlight(line));
+
+  const first = ranks[0]['name'];
+  highlight(first);
 }

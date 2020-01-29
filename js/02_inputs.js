@@ -1,9 +1,19 @@
-var freeColours = ['#66c2a5','#fc8d62','#8da0cb','#e78ac3','#a6d854','#ffd92f'];
-var usedColours = []
+const colourPalette = ['#66c2a5','#fc8d62','#8da0cb','#e78ac3','#a6d854','#ffd92f'];
+var freeColours = colourPalette.slice();
+var usedColours = [];
+
+var highlighted = [];
 
 const names = d3.select('#highlightName');
 
 function highlight(n) {
+  if (highlighted.length == colourPalette.length) {
+    var nameOut = highlighted[0];
+    unhighlight(nameOut);
+  }
+
+  highlighted.push(n);
+
   var line = d3.select(`path.line#${n}`);
   var col = freeColours.pop();
   usedColours.push(col);
@@ -22,12 +32,12 @@ function highlight(n) {
       .on('click', () => unhighlight(n));
 }
 
-
 function unhighlight(n) {
+  highlighted.splice(highlighted.indexOf(n), 1);
   var line = d3.select(`path.line#${n}`);
 
   var col = line.style('stroke');
-  usedColours.pop(col);
+  usedColours.splice(usedColours.indexOf(col), 1);
   freeColours.push(col);
 
   line.style('stroke', 'lightgrey');
@@ -40,8 +50,6 @@ function inputName(name) {
   var line = d3.select(`path.line#${name}`);
   if (!line.empty()) {
     highlight(name);
-  } else {
-
   }
   document.getElementById('highlightInput').value = '';
 }
@@ -50,4 +58,16 @@ function inputPress(e) {
   if (e.keyCode == 13) {
     inputName(document.getElementById('highlightInput').value);
   }
+}
+
+function clearSelection() {
+  freeColours = colourPalette.slice();
+  usedColours = [];
+  highlighted = [];
+
+  d3.selectAll('path.line')
+    .style('stroke', 'lightgrey')
+    .classed('highlight', false);
+
+  d3.select('#highlightName').html('');
 }

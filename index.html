@@ -7,6 +7,10 @@
 </head>
 <body>
   <h1>Baby Names</h1>
+  <form id="genderInput" action="">
+    <input type="radio" name="gender" value="female" checked onchange="drawFemale()">Female
+    <input type="radio" name="gender" value="male" onchange="drawMale()">Male
+  </form>
   <div id="inputHolder">
     <input id="highlightInput" type="text" onkeypress="inputPress(event)"></input>
     <span id="inputResponse"></span>
