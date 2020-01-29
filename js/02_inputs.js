@@ -47,8 +47,9 @@ function unhighlight(n) {
 }
 
 function inputName(name) {
+  name = titleCase(name);
   var line = d3.select(`path.line#${name}`);
-  if (!line.empty()) {
+  if (!line.empty() & highlighted.indexOf(name) == -1) {
     highlight(name);
   }
   document.getElementById('highlightInput').value = '';
@@ -70,4 +71,9 @@ function clearSelection() {
     .classed('highlight', false);
 
   d3.select('#highlightName').html('');
+}
+
+function titleCase(str) {
+  str = str.toLowerCase();
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }

@@ -48,6 +48,30 @@ function drawChart(data) {
       .attr('d', d => line(d.ranks))
       .on('click', () => highlight(line));
 
+
+  function hover(svg, path) {
+    svg.style('position', 'relative');
+
+    svg.on('mousemove', moved);
+
+    function moved() {
+      d3.event.preventDefault();
+      const ym = rankScale.invert(d3.event.layerY);
+      const xm = yearScale.invert(d3.event.layerX);
+      const i1 = d3.bisect(years, xm, 1);
+      const i0 = i1 - 1;
+      const i = xm - years[i0] > years[i1] - xm ? i1: i0;
+      const s = ranks.reduce((a, b) => Math.abs(a.ranks[i] - ym) < Math.abs(b.ranks[i] - ym) ? a : b);
+      path.classed('hovered', d => d.name === s.name);
+
+      d3.select('#hoverName')
+          .style('background-color', '#bebebe')
+          .text(s.name)
+    }
+  }
+
+  svg.call(hover, path);
+
   const first = ranks[0]['name'];
   highlight(first);
 }

@@ -30,3 +30,8 @@ path.highlight {
   stroke-width: 1.5;
   stroke-opacity: 100%;
 }
+path.hovered {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-opacity: 100%;
+}
