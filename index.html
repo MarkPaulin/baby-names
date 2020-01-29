@@ -1,0 +1,25 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <link href="stylesheets/main.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Baby Names</title>
+</head>
+<body>
+  <h1>Baby Names</h1>
+  <div id="inputHolder">
+    <input id="highlightInput" type="text" onkeypress="inputPress(event)"></input>
+    <span id="inputResponse"></span>
+  </div>
+
+  <div id="highlightName"></div>
+  <div id="chartArea"></div>
+
+  <script type="text/javascript" src="js/lib/d3.min.js"></script>
+
+  <script type="text/javascript" src="js/00_init.js"></script>
+  <script type="text/javascript" src="js/01_chart.js"></script>
+  <script type="text/javascript" src="js/02_inputs.js"></script>
+
+  <script type="text/javascript" src="js/script.js"></script>
+</body>

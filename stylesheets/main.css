@@ -1,0 +1,32 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+#highlightName {
+  padding-top: 10px;
+  height: 40px;
+}
+span.highlighted {
+  color: white;
+  border-radius: 4px;
+  margin: 2px;
+  padding: 5px;
+}
+span.highlighted > .remove {
+  cursor: pointer;
+  position: relative;
+  font-size: 10px;
+  font-weight: bold;
+  bottom: 10px;
+  right: -2px;
+}
+path.line {
+  fill: none;
+  stroke: lightgrey;
+  stroke-width: 0.5;
+  stroke-opacity: 60%;
+}
+path.highlight {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-opacity: 100%;
+}
