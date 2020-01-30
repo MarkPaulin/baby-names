@@ -14,7 +14,7 @@ function highlight(n) {
 
   highlighted.push(n);
 
-  var line = d3.select(`path.line#${n}`);
+  var line = d3.select(`path#${n}`);
   var col = freeColours.pop();
   usedColours.push(col);
 

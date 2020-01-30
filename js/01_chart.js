@@ -45,14 +45,15 @@ function drawChart(data) {
     .join('path')
       .attr('class', 'line')
       .attr('id', d => d.name)
-      .attr('d', d => line(d.ranks))
-      .on('click', () => highlight(line));
+      .attr('d', d => line(d.ranks));
 
 
   function hover(svg, path) {
     svg.style('position', 'relative');
 
-    svg.on('mousemove', moved);
+    svg.on('mousemove', moved)
+      .on('mouseout', left)
+      .on('click', clicked);
 
     function moved() {
       d3.event.preventDefault();
@@ -67,6 +68,22 @@ function drawChart(data) {
       d3.select('#hoverName')
           .style('background-color', '#bebebe')
           .text(s.name)
+    }
+
+    function left() {
+      d3.event.preventDefault();
+      path.classed('hovered', false);
+      d3.select('#hoverName')
+        .style('background', 'none')
+        .html('');
+    }
+
+    function clicked() {
+      d3.event.preventDefault();
+      const name = d3.select('.hovered').attr('id');
+      if (highlighted.indexOf(name) == -1) {
+        highlight(name);
+      }
     }
   }
 
